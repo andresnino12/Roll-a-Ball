@@ -1,27 +1,70 @@
 using UnityEngine;
-using UnityEngine.InputSystem; 
+using UnityEngine.InputSystem;
+using JetBrains.Annotations;
+using UnityEngine.Rendering.Universal.Internal;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 10f;
-    private Rigidbody rb;
-    private Vector2 moveInput;  // guarda el input
-
-    void Start()
+    [SerializeField] private bool isGround;
+    [SerializeField] private float jumpForce;
+    float movementx;
+    float movementy;
+    [SerializeField] private float speed = 5;
+    [SerializeField] private Rigidbody rb;
+    private Camera PlayerCamera;
+    private bool isJumping;
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        PlayerCamera = Camera.main; 
     }
 
-    // Este método se llama AUTOMÁTICAMENTE cuando hay input
-    // Unity lo conecta solo si el método se llama OnMove
-    void OnMove(InputValue value)
+    void Update()
     {
-        moveInput = value.Get<Vector2>();
+        
+    }
+
+    void OllisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Ground"))
+        {
+            isGround=false;
+        }
+    }
+    #region entradasTeclado
+    void OnMove(InputValue movementValue)
+    {
+        Vector2 movement = movementValue.Get<Vector2>();
+        movementx = movement.x;
+        movementy = movement.y;
+    }
+    #endregion
+
+    void OnJump()
+    {
+        isJumping=true;
     }
 
     void FixedUpdate()
     {
-        Vector3 movement = new Vector3(moveInput.x, 0f, moveInput.y);
-        rb.AddForce(movement * speed);
+        Vector3 cameraForward = new Vector3();
+        cameraForward = PlayerCamera.transform.forward;
+
+        Vector3 cameraRight = new Vector3();
+        cameraRight = PlayerCamera.transform.right;
+
+        cameraForward.y = 0;
+        cameraRight.y =0;
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        Vector3 movementDirection = (cameraForward * movementy)+(cameraRight * movementx);
+        rb.AddForce(movementDirection * speed);
+        if ( isJumping==true)
+        {
+            rb.AddForce(Vector3.up * jumpForce,ForceMode.Impulse);
+            isJumping=false;
+        }
+
     }
 }
