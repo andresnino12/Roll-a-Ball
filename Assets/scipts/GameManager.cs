@@ -2,27 +2,38 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;  
-    private Vector3 lastCheckpointPosition;
-    private bool hasCheckpoint = false;
+    public static GameManager instance;
 
-    void Awake()
+    [SerializeField] private Score score;
+    private Vector3 currySpawnPlayer;
+    public Vector3 CurrSpawnPlayer {get =>CurrSpawnPlayer;set =>CurrSpawnPlayer = value;}
+    public GameObject player;
+
+    void Start()
     {
-        
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        instance = this;
     }
 
-    public void SetCheckpoint(int index, Vector3 position)
+    public void ChangeScore(int newScore)
     {
-        lastCheckpointPosition = position;
-        hasCheckpoint = true;
+        score.AddScore(newScore);
     }
 
-    public Vector3 GetRespawnPosition()
+    public void ClearPlayerPref()
     {
-        return hasCheckpoint ? lastCheckpointPosition : Vector3.zero;
+        PlayerPrefs.DeleteAll();
+    }
+
+    public void ReSpawnPlayer()
+    {
+        player.SetActive(false);
+        player.transform.position = CurrSpawnPlayer;
+        player.GetComponent<PlayerController>().rb.angularVelocity = Vector3.zero;
+        player.GetComponent<PlayerController>().rb.linearVelocity= Vector3.zero;
+        player.SetActive(true);
     }
 }

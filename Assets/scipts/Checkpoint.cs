@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    public int checkpointIndex;  
+    [SerializeField] private Transform spawnPosition;
+    private bool isActive = true;
 
-    private void OnTriggerEnter(Collider other)
+    void OTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && isActive)
         {
-            GameManager.instance.SetCheckpoint(checkpointIndex, transform.position);
-            Debug.Log("Checkpoint " + checkpointIndex + " activado!");
+            GameManager.instance.CurrSpawnPlayer = spawnPosition.position;
+            isActive = false;
         }
     }
 }

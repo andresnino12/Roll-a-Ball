@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     float movementx;
     float movementy;
     [SerializeField] private float speed = 5;
-    [SerializeField] private Rigidbody rb;
+     public Rigidbody rb;
     private Camera PlayerCamera;
     private bool isJumping;
     void Awake()
@@ -24,7 +24,14 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    void OllisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Ground"))
+        {
+            isGround=true;
+        }
+    }
+    void OnCollisionExit(Collision collision)
     {
         if (collision.transform.CompareTag("Ground"))
         {
@@ -60,11 +67,11 @@ public class PlayerController : MonoBehaviour
 
         Vector3 movementDirection = (cameraForward * movementy)+(cameraRight * movementx);
         rb.AddForce(movementDirection * speed);
-        if ( isJumping==true)
-        {
-            rb.AddForce(Vector3.up * jumpForce,ForceMode.Impulse);
-            isJumping=false;
-        }
-
+        if ( isJumping == true && isGround)
+        {  
+             rb.AddForce(Vector3.up * jumpForce,ForceMode.Impulse);
+             isJumping=false;
+        }    
+            
     }
 }
