@@ -5,8 +5,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] private Score score;
-    private Vector3 currySpawnPlayer;
-    public Vector3 CurrSpawnPlayer {get =>CurrSpawnPlayer;set =>CurrSpawnPlayer = value;}
+    private Vector3 currSpawnPlayer;
+    public Vector3 CurrSpawnPlayer {get =>currSpawnPlayer;set =>currSpawnPlayer = value;}
     public GameObject player;
 
     void Start()
@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
         instance = this;
+        currSpawnPlayer = player.transform.position;
     }
 
     public void ChangeScore(int newScore)

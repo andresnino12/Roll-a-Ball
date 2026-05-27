@@ -4,7 +4,7 @@ public class DeathZone : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("DeathZone tocó: " + other.gameObject.name + " tag: " + other.gameObject.tag);
+       // Debug.Log("DeathZone tocó: " + other.gameObject.name + " tag: " + other.gameObject.tag);
 
         if (other.CompareTag("Player"))
         {
