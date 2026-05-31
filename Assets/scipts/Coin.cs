@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEditor.Build;
 
 public class Coin : MonoBehaviour
 {

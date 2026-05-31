@@ -4409,7 +4409,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 406
+  m_VersionIndex: 412
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4565,7 +4565,6 @@ GameObject:
   - component: {fileID: 6724962105757341599}
   - component: {fileID: 7367605450298768700}
   - component: {fileID: 7904210386076146353}
-  - component: {fileID: 6186338576658476658}
   m_Layer: 0
   m_Name: Martillo
   m_TagString: Untagged
@@ -8911,7 +8910,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 250
+  m_VersionIndex: 256
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -9022,20 +9021,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &6186338576658476658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7955756136490541799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d615fbcea36b93d41bdd0ce4c3b1c7b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObstacleSimpleController
-  target: {fileID: 0}
-  speed: 0
-  obstacleObj: {fileID: 0}
-  StartPosition: {x: 0, y: 0, z: 0}
-  rotationSpeed: 0
